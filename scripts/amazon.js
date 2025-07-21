@@ -67,11 +67,12 @@ products.forEach((product) => {
       document.querySelector(".js-product-grid").innerHTML = productsHTML;
   
 
+let cartQuality = 0;
 
 function updateCartQuality(productId) {
 
 let select = document.querySelector(`.js-quality-selector-${productId}`)
-  cartQuality +=Number(select.value)
+  cartQuality += Number(select.value)
     document.querySelector(".js-cart-quality").textContent = cartQuality;
 
      const addedMessage = document.querySelector(`.js-added-${productId}`)
@@ -84,12 +85,12 @@ let select = document.querySelector(`.js-quality-selector-${productId}`)
 
 
 
-let cartQuality = 0;
-
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
    const productId = button.dataset.productId;
   button.addEventListener("click", function () {
-   cartModule.adddtoCart(productId);
+  let Quality = Number(document.querySelector(`.js-quality-selector-${productId}`).value)
+  console.log(Quality);
+   cartModule.adddtoCart(productId,Quality);
     updateCartQuality(productId);
   });
 });
