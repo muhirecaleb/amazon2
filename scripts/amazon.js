@@ -1,4 +1,4 @@
-"use strict";
+"use strict"; 
 
 import * as cartModule from "../data/cart.js";
 import { products } from "../data/products.js";
