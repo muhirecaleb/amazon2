@@ -1,11 +1,10 @@
-'use strict';
+"use strict";
 
-import  * as cartModule from '../data/cart.js';
-import { products } from '../data/products.js';
-import {formatCurreny} from "./utils/money.js";
+import * as cartModule from "../data/cart.js";
+import { products } from "../data/products.js";
+import { formatCurreny } from "./utils/money.js";
 
 let productsHTML = "";
-
 
 products.forEach((product) => {
   productsHTML += `
@@ -62,35 +61,42 @@ products.forEach((product) => {
 
     
         `;
-      });
-      
-      document.querySelector(".js-product-grid").innerHTML = productsHTML;
-  
+});
+
+document.querySelector(".js-product-grid").innerHTML = productsHTML;
 
 let cartQuality = 0;
 
-function updateCartQuality(productId) {
-
-let select = document.querySelector(`.js-quality-selector-${productId}`)
-  cartQuality += Number(select.value)
+function updateCartQualityDom() {
+  cartModule.cart.forEach((item) => {
+    cartQuality += item.quality;
     document.querySelector(".js-cart-quality").textContent = cartQuality;
+  });
+}
+updateCartQualityDom();
 
-     const addedMessage = document.querySelector(`.js-added-${productId}`)
- if(addedMessage) {
-    addedMessage.classList.add("opacity")
- }
- setTimeout(() =>{ 
-  addedMessage.classList.remove("opacity")},1500)
+function updateCartQuality(productId) {
+  let select = document.querySelector(`.js-quality-selector-${productId}`);
+  cartQuality += Number(select.value);
+  document.querySelector(".js-cart-quality").textContent = cartQuality;
+
+  const addedMessage = document.querySelector(`.js-added-${productId}`);
+  if (addedMessage) {
+    addedMessage.classList.add("opacity");
+  }
+  setTimeout(() => {
+    addedMessage.classList.remove("opacity");
+  }, 1500);
 }
 
-
-
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
-   const productId = button.dataset.productId;
+  const productId = button.dataset.productId;
   button.addEventListener("click", function () {
-  let Quality = Number(document.querySelector(`.js-quality-selector-${productId}`).value)
-  console.log(Quality);
-   cartModule.adddtoCart(productId,Quality);
+    let Quality = Number(
+      document.querySelector(`.js-quality-selector-${productId}`).value
+    );
+    console.log(Quality);
+    cartModule.adddtoCart(productId, Quality);
     updateCartQuality(productId);
   });
 });
