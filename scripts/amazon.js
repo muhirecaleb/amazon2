@@ -2,7 +2,7 @@
 
 import * as cartModule from "../data/cart.js";
 import { products } from "../data/products.js";
-import { formatCurreny } from "./utils/money.js";
+import  formatCurreny  from "./utils/money.js";
 
 let productsHTML = "";
 
