@@ -2,6 +2,7 @@ import { cart, removeFromCart,updateQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurreny } from "./utils/money.js";
 
+console.log(dayjs());
 
 document.querySelector(".js-checkout-item").textContent = `${cart.length} items`;
 
@@ -163,4 +164,3 @@ document.querySelectorAll('.save-quantity-link')
       document.querySelector(`.js-quantity-label-${productId}`).textContent = newQuantity;
     });
   });
-
